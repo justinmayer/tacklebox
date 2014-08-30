@@ -72,7 +72,7 @@ function __tacklebox_prepend_path --no-scope-shadowing --description \
     end
 
     if test -d $path
-        # if the path is already in the list, remove it first.
+        # If the path is already in the list, remove it first.
         # Prepending puts it in front, where it belongs
         if set -l idx (contains -i -- $path $$list)
             set -e -- {$list}[$idx]
@@ -85,7 +85,7 @@ end
 # Configuration
 ###
 
-# Standardize function path, to be restored later
+# Standardize function path, to be restored later.
 # Reset to just the datadir functions. At the end, we'll put the user
 # functions back on front, and the sysconf functions on the end in front
 # of the datadir functions, as is normally expected.

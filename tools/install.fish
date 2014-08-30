@@ -48,24 +48,24 @@ end
 colored blue "Appending Tacklebox and Tackle to ~/.config/fish/config.fish"
 set -l config "
 # Paths to your tackle
-set fish_path ~/.tackle ~/.tacklebox
+set tacklebox_path ~/.tackle ~/.tacklebox
 
 # Theme
-#set fish_theme entropy
+#set tacklebox_theme entropy
 
 # Which modules would you like to load? (modules can be found in ~/.tackle/modules/*)
 # Custom modules may be added to ~/.tacklebox/modules/
-# Example format: set fish_modules virtualfish virtualhooks
+# Example format: set tacklebox_modules virtualfish virtualhooks
 
 # Which plugins would you like to enable? (plugins can be found in ~/.tackle/plugins/*)
 # Custom plugins may be added to ~/.tacklebox/plugins/
-# Example format: set fish_plugins python extract
+# Example format: set tacklebox_plugins python extract
 
 # Load Tacklebox configuration
 . ~/.tacklebox/tacklebox.fish
 "
 
-mkdir -p ~/.config/fish ~/.tacklebox/{modules,plugins,themes}
+mkdir -p ~/.config/fish
 echo $config >> ~/.config/fish/config.fish
 
 colored green "
