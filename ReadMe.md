@@ -49,20 +49,19 @@ Modules, plugins, and themes are enabled via the configuration file at: `~/.conf
 
 The following additions to that file represent a minimal configuration that includes no external repositories and does not enable any modules or plugins:
 
-    set fish_path $HOME/.tacklebox
-    . $HOME/.tacklebox/tacklebox.fish
+    source ~/.tacklebox/tacklebox.fish
 
-But since one of the advantages of Tacklebox is the ability to include external repositories, let's replace the two lines above with some configuration that includes an external repository and enables some of its components.
+But since one of the advantages of Tacklebox is the ability to include external repositories, let's replace the line above with some configuration that includes an external repository and enables some of its components.
 
-Assuming you used the automated install script (or manually cloned the [Tackle][] repository as noted above), you can enable the [Tackle][] repository by adding it to the `fish_path` list in order of preference. While we're at it, let's also specify some modules, plugins, and a theme:
+Assuming you used the automated install script (or manually cloned the [Tackle][] repository as noted above), you can enable the [Tackle][] repository by adding it to the `tacklebox_path` list in order of preference. While we're at it, let's also specify some modules, plugins, and a theme:
 
-    set fish_path $HOME/.tackle $HOME/.tacklebox
-    set fish_modules virtualfish virtualhooks
-    set fish_plugins python extract
-    set fish_theme entropy
-    . $HOME/.tacklebox/tacklebox.fish
+    set tacklebox_path ~/.tackle
+    set tacklebox_modules virtualfish virtualhooks
+    set tacklebox_plugins python extract
+    set tacklebox_theme entropy
+    source ~/.tacklebox/tacklebox.fish
 
-The last line initializes Tacklebox, so whichever `fish_*` settings you choose, just make sure they come before that line, or else they won't be taken into account when Tacklebox is initialized.
+The last line initializes Tacklebox, so whichever `tacklebox_*` settings you choose, just make sure they come before that line, or else they won't be taken into account when Tacklebox is initialized.
 
 ## Concepts
 
@@ -86,9 +85,9 @@ Can't find a plugin that does what you want? Prefer to create your own theme? Ta
 * `~/.tacklebox/plugins/`
 * `~/.tacklebox/themes/`
 
-Remember that adding your custom components at the above locations isn't sufficient — you must enable them by including them in your `fish_modules`, `fish_plugins`, and/or `fish_theme` settings.
+Remember that adding your custom components at the above locations isn't sufficient — you must enable them by including them in your `tacklebox_modules`, `tacklebox_plugins`, and/or `tacklebox_theme` settings, in addition to including tacklebox itself in your `tacklebox_path` setting.
 
-If you would rather keep your collection of custom goodies in your own versioned repository instead of the directories provided by Tacklebox, just create your own repository at your preferred filesystem location and prepend its path to the `fish_path` list.
+If you would rather keep your collection of custom goodies in your own versioned repository instead of the directories provided by Tacklebox, just create your own repository at your preferred filesystem location and prepend its path to the `tacklebox_path` list.
 
 Have a very simple function that you don't necessarily feel is worthy of creating a plugin? Put it in `~/.config/fish/functions/[your-function-name].fish`, creating the parent directory if it doesn't already exist.
 
