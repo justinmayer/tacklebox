@@ -81,19 +81,30 @@ function __tacklebox_prepend_path --no-scope-shadowing --description \
     end
 end
 
+function __tacklebox_append_path --no-scope-shadowing --description \
+        'Append the given path, if it exists, to the specified path list (defaults to PATH)'
+    set -l path "$argv[1]"
+    set -l list PATH
+    if set -q argv[2]
+        set list $argv[2]
+    end
+
+    if test -d $path
+        # If the path is already in the list, skip it.
+        if not contains -- $path $$list
+            set -- $list $$list $path
+        end
+    end
+end
+
 ###
 # Configuration
 ###
 
 # Standardize function path, to be restored later.
-# Reset to just the datadir functions. At the end, we'll put the user
-# functions back on front, and the sysconf functions on the end in front
-# of the datadir functions, as is normally expected.
 set -l user_function_path $fish_function_path
-__tacklebox_strip_word "$__fish_sysconfdir/functions" user_function_path
-set -l no_sysconf $status
-__tacklebox_strip_word "$__fish_datadir/functions" user_function_path
-set fish_function_path "$__fish_datadir/functions"
+# Ensure the function path is global, not universal
+set -g fish_function_path "$__fish_datadir/functions"
 
 # Add all functions
 for repository in $tacklebox_path[-1..1]
@@ -118,11 +129,14 @@ if test -n "$tacklebox_theme"
 end
 
 # Add back the user and sysconf functions as appropriate
-set user_function_path $user_function_path $fish_function_path
-__tacklebox_strip_word "$__fish_datadir/functions" user_function_path
-__tacklebox_strip_word "$__fish_sysconfdir/functions" user_function_path # just in case
-and set no_sysconf 0
-if test $no_sysconf -eq 0
+for path in $fish_function_path
+    # don't append either system path
+    if not contains -- "$path" "$__fish_sysconfdir/functions" "$__fish_datadir/functions"
+        __tacklebox_append_path $path user_function_path
+    end
+end
+if __tacklebox_strip_word "$__fish_sysconfdir/functions" user_function_path
     set user_function_path $user_function_path "$__fish_sysconfdir/functions"
 end
-set fish_function_path $user_function_path "$__fish_datadir/functions"
+__tacklebox_strip_word "$__fish_datadir/functions" user_function_path
+set -g fish_function_path $user_function_path "$__fish_datadir/functions"
