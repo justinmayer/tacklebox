@@ -1,6 +1,6 @@
 # Tacklebox
 
-[![Support via Gittip](http://img.shields.io/badge/tips-accepted-brightgreen.svg)](https://www.gittip.com/justinmayer/)
+[![Support via Gratipay](http://img.shields.io/badge/tips-accepted-brightgreen.svg)](https://www.gratipay.com/justinmayer/)
 
 ### Problem
 
