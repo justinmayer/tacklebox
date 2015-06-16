@@ -18,7 +18,13 @@ Tacklebox solves this problem by allowing you to utilize community-curated repos
 
 Assuming [fish][] 2.0+ is already installed, the following will install Tacklebox and [Tackle][]:
 
-    curl -L https://github.com/justinmayer/tacklebox/raw/master/tools/install.fish | fish
+    curl -O https://raw.githubusercontent.com/justinmayer/tacklebox/master/tools/install.fish
+    cat install.fish  # inspect contents to ensure you understand what it’s doing
+    cat install.fish | fish; rm install.fish
+
+Alternatively, if you aware of the potential security concern with piping directly to shell, you can perform the installation in one step:
+
+    curl -L https://raw.githubusercontent.com/justinmayer/tacklebox/master/tools/install.fish | fish
 
 You can now skip to the **Usage** section below.
 
