@@ -8,15 +8,15 @@ It's tough to organize and share shell code libraries and snippets.
 
 ### Solution
 
-Tacklebox is a framework for the [fish][] shell that makes it easy to organize and share collections of useful shell functions, tools, and themes.
+Tacklebox is a framework for the [Fish][] shell that makes it easy to organize and share collections of useful shell functions, tools, and themes.
 
-Fish's design philosophy is to avoid including the kitchen sink and only bundle built-in functions that are hard to implement as external tools. This lean design is part of what makes [fish][] great. The flip side is that you (and other folks like you) might want to do something that [fish][] doesn't do by default, and now everyone is trying to figure out how to solve it by inventing the wheel independently.
+Fish's design philosophy is to avoid including the kitchen sink and only bundle built-in functions that are hard to implement as external tools. This lean design is part of what makes Fish great. The flip side is that you (and other folks like you) might want to do something that Fish doesn't do by default, and now everyone is trying to figure out how to solve it by inventing the wheel independently.
 
 Tacklebox solves this problem by allowing you to utilize community-curated repositories, enabling only those tools that are relevant to your desired workflow.
 
 ## Installation
 
-Assuming [fish][] 2.0+ is already installed, the following will install Tacklebox and [Tackle][]:
+Assuming Fish 2.0+ is already installed, the following will install Tacklebox and [Tackle][]:
 
     curl -O https://raw.githubusercontent.com/justinmayer/tacklebox/master/tools/install.fish
     cat install.fish  # inspect contents to ensure you understand what it’s doing
@@ -40,7 +40,7 @@ To install external repositories, first clone them to your desired location. For
 
 Don't like those locations? Clone them wherever you want. Just keep in mind that the instructions below assume those locations, so modify them as needed.
 
-If you are setting up [fish][] for the first time and don't have an existing configuration file at `~/.config/fish/config.fish`, now is a good time to create one.
+If you are setting up Fish for the first time and don't have an existing configuration file at `~/.config/fish/config.fish`, now is a good time to create one.
 
 ### Staying up-to-date
 
@@ -63,7 +63,7 @@ Assuming you used the automated install script (or manually cloned the [Tackle][
 
     set tacklebox_path ~/.tackle
     set tacklebox_modules virtualfish virtualhooks
-    set tacklebox_plugins python extract
+    set tacklebox_plugins extract grc pip python up
     set tacklebox_theme entropy
     source ~/.tacklebox/tacklebox.fish
 
@@ -115,7 +115,7 @@ _But I want to create a plugin that includes files that must be sourced!_
 
 That's not a question, but you can still put `*.load` files inside plugins if you must, and they will be sourced. That said, dynamically-loadable functions are probably more "fishy", and code that isn't suitable as dynamically-loadable functions might be best included as a module.
 
-[fish]: http://fishshell.com/
+[Fish]: http://fishshell.com/
 [contributing guidelines]: https://github.com/justinmayer/tacklebox/blob/master/Contributing.md
 [Tackle]: https://github.com/justinmayer/tackle
 [Oh My Fish]: https://github.com/bpinto/oh-my-fish
