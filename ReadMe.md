@@ -1,7 +1,5 @@
 # Tacklebox
 
-[![Support via Gratipay](http://img.shields.io/badge/tips-accepted-brightgreen.svg)](https://www.gratipay.com/justinmayer/)
-
 ### Problem
 
 It's tough to organize and share shell code libraries and snippets.
