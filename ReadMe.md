@@ -101,13 +101,13 @@ Contributions to both Tacklebox and [Tackle][] are welcomed. If you'd like to co
 
 ## Questions nobody asked but here are answers anyway
 
-_How is this different from Oh My Fish?_
+_How is this different from other shell management tools?_
 
-Tacklebox owes a debt of gratitude to the many fine folks who have contributed to Oh My Fish. Among the differences are that Tacklebox…
+Tacklebox…
 
-1. … supports multiple repositories, including your own if you wish
-1. … decouples the repositories (e.g., [Tackle][]) from the loading mechanisms and organizational conventions (i.e., Tacklebox)
-1. … can source modules using `*.fish` filename extensions (instead of using `*.load`, which requires monkeying with your $EDITOR to get proper syntax highlighting)
+1. supports multiple repositories, including your own if you wish
+1. decouples the repositories (e.g., [Tackle][]) from the loading mechanisms and organizational conventions (i.e., Tacklebox)
+1. can source modules using `*.fish` filename extensions (instead of using `*.load`, which requires monkeying with your $EDITOR to get proper syntax highlighting)
 
 _But I want to create a plugin that includes files that must be sourced!_
 
@@ -116,4 +116,3 @@ That's not a question, but you can still put `*.load` files inside plugins if yo
 [Fish]: http://fishshell.com/
 [contributing guidelines]: https://github.com/justinmayer/tacklebox/blob/master/Contributing.md
 [Tackle]: https://github.com/justinmayer/tackle
-[Oh My Fish]: https://github.com/bpinto/oh-my-fish
