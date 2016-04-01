@@ -51,7 +51,7 @@ Updating is easy:
 
 Modules, plugins, and themes are enabled via the configuration file at: `~/.config/fish/config.fish`
 
-The following additions to that file represent a minimal configuration that includes no external repositories and does not enable any modules or plugins:
+Adding the following line to the above file will create a minimal configuration that includes no external repositories and does not enable any modules or plugins:
 
     source ~/.tacklebox/tacklebox.fish
 
@@ -89,7 +89,7 @@ Can't find a plugin that does what you want? Prefer to create your own theme? Ta
 * `~/.tacklebox/plugins/`
 * `~/.tacklebox/themes/`
 
-Remember that adding your custom components at the above locations isn't sufficient — you must enable them by including them in your `tacklebox_modules`, `tacklebox_plugins`, and/or `tacklebox_theme` settings, in addition to including tacklebox itself in your `tacklebox_path` setting.
+Remember that adding your custom components at the above locations isn't sufficient — you must enable them by including them in your `tacklebox_modules`, `tacklebox_plugins`, and/or `tacklebox_theme` settings, in addition to including `~/.tacklebox` itself in your `tacklebox_path` setting.
 
 If you would rather keep your collection of custom goodies in your own versioned repository instead of the directories provided by Tacklebox, just create your own repository at your preferred filesystem location and prepend its path to the `tacklebox_path` list.
 
