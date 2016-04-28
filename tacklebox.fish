@@ -97,6 +97,68 @@ function __tacklebox_append_path --no-scope-shadowing --description \
     end
 end
 
+function __tacklebox_load_env_file --no-scope-shadowing --description \
+        'Load and export all values in a env file'
+    # Loop through lines of .env file
+    set -l retVal 0
+    if test -r $argv[1]
+        while read line;
+            # Strip all comments from lines
+            string replace -r '#.*' '' $line | read -l line
+            # Skip empty lines
+            if test -n $line
+                if string match -q "*=*" $line
+                    set -l split (string split -m 1 = $line)
+                    # Using the following does not work as it does not substitute the path
+                    # Setting the PATH with read breaks
+                    if test $split[1] != PATH
+                        # need to expand $split[2] twice so that any vars stored in the file get expanded
+                        set -l TMP "echo -e \"$split[2]\""
+                        printf "%s" (eval $TMP) | read -x $split[1]
+                    else
+                        # Fish handles PATH specially and must be handled specially
+                        # Handle : or ' ' seperation of paths as thats what people expect
+                        string replace '$PATH' "$PATH" $split[2] | string join ' ' | string replace -a ':' ' ' | read -l TMP
+                        # Make the PATH only contain unique entries, 
+                        # split the list into lines, number each one, sort by the 
+                        # original data, uniq, sort by line number then remove line numbers
+                        string replace -a \n $TMP | nl | sort -k 2 | uniq -f 1 | sort -n | sed 's/\s*[0-9]\+\s\+//' | read -l TMP
+                        set -x PATH (string split ' ' $TMP)
+                    end
+                else
+                    echo "Invalid line not added to environment: $line"
+                    set -l retVal 1
+                end
+            end
+        ; end < $argv[1]
+    end
+    return $retVal
+end
+
+function __tacklebox_unload_env_file --no-scope-shadowing --description \
+        'Clears all environment variables loaded in a env file'
+    set -l retVal 0
+    # Loop through lines of .env file
+    if test -r $argv[1]
+        while read line;
+            # Strip all comments from lines
+            string replace -r '#.*' '' $line | read -l line
+            # Skip empty lines
+            if test -n $line
+                # Check that string contains either exactly 1 = or exactly 1 ' '
+                if string match -q "*=*" $line
+                    set -l split (string split -m 1 = $line)
+                    set -ex $split[1]
+                else
+                    echo "Invalid line not removed from environment: $line"
+                    set -l retVal 1
+                end
+            end
+        ; end < $argv[1]
+    end
+    return $retVal
+end
+
 ###
 # Configuration
 ###
@@ -109,6 +171,15 @@ set -g fish_function_path "$__fish_datadir/functions"
 # Add all functions
 for repository in $tacklebox_path[-1..1]
     __tacklebox_prepend_path $repository/functions fish_function_path
+end
+
+# Load Environment - This requires fish 2.3 with the string builtin
+if type -q string
+    for repository in $tacklebox_path[-1..1]
+        for env_file in $repository/*.env
+            __tacklebox_load_env_file $env_file
+        end
+    end
 end
 
 # Add all specified plugins
