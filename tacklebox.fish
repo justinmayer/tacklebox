@@ -101,10 +101,12 @@ end
 # Configuration
 ###
 
+# Support Fish 2.x and 3.x data directories, respectively
+set -l fish_data_dir $__fish_datadir $__fish_data_dir
 # Standardize function path, to be restored later.
 set -l user_function_path $fish_function_path
 # Ensure the function path is global, not universal
-set -g fish_function_path "$__fish_datadir/functions"
+set -g fish_function_path "$fish_data_dir/functions"
 
 # Add all functions
 for repository in $tacklebox_path[-1..1]
@@ -131,12 +133,12 @@ end
 # Add back the user and sysconf functions as appropriate
 for path in $fish_function_path
     # don't append either system path
-    if not contains -- "$path" "$__fish_sysconfdir/functions" "$__fish_datadir/functions"
+    if not contains -- "$path" "$__fish_sysconfdir/functions" "$fish_data_dir/functions"
         __tacklebox_append_path $path user_function_path
     end
 end
 if __tacklebox_strip_word "$__fish_sysconfdir/functions" user_function_path
     set user_function_path $user_function_path "$__fish_sysconfdir/functions"
 end
-__tacklebox_strip_word "$__fish_datadir/functions" user_function_path
-set -g fish_function_path $user_function_path "$__fish_datadir/functions"
+__tacklebox_strip_word "$fish_data_dir/functions" user_function_path
+set -g fish_function_path $user_function_path "$fish_data_dir/functions"
