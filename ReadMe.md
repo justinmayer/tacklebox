@@ -1,22 +1,20 @@
 # Tacklebox
 
-[![Support via Gratipay](http://img.shields.io/badge/tips-accepted-brightgreen.svg)](https://www.gratipay.com/justinmayer/)
-
 ### Problem
 
 It's tough to organize and share shell code libraries and snippets.
 
 ### Solution
 
-Tacklebox is a framework for the [fish][] shell that makes it easy to organize and share collections of useful shell functions, tools, and themes.
+Tacklebox is a framework for the [Fish][] shell that makes it easy to organize and share collections of useful shell functions, tools, and themes.
 
-Fish's design philosophy is to avoid including the kitchen sink and only bundle built-in functions that are hard to implement as external tools. This lean design is part of what makes [fish][] great. The flip side is that you (and other folks like you) might want to do something that [fish][] doesn't do by default, and now everyone is trying to figure out how to solve it by inventing the wheel independently.
+Fish's design philosophy is to avoid including the kitchen sink and only bundle built-in functions that are hard to implement as external tools. This lean design is part of what makes Fish great. The flip side is that you (and other folks like you) might want to do something that Fish doesn't do by default, and now everyone is trying to figure out how to solve it by inventing the wheel independently.
 
 Tacklebox solves this problem by allowing you to utilize community-curated repositories, enabling only those tools that are relevant to your desired workflow.
 
 ## Installation
 
-Assuming [fish][] 2.0+ is already installed, the following will install Tacklebox and [Tackle][]:
+Assuming Fish 2.0+ is already installed, the following will install Tacklebox and [Tackle][]:
 
     curl -O https://raw.githubusercontent.com/justinmayer/tacklebox/master/tools/install.fish
     cat install.fish  # inspect contents to ensure you understand what it’s doing
@@ -40,7 +38,7 @@ To install external repositories, first clone them to your desired location. For
 
 Don't like those locations? Clone them wherever you want. Just keep in mind that the instructions below assume those locations, so modify them as needed.
 
-If you are setting up [fish][] for the first time and don't have an existing configuration file at `~/.config/fish/config.fish`, now is a good time to create one.
+If you are setting up Fish for the first time and don't have an existing configuration file at `~/.config/fish/config.fish`, now is a good time to create one.
 
 ### Staying up-to-date
 
@@ -53,7 +51,7 @@ Updating is easy:
 
 Modules, plugins, and themes are enabled via the configuration file at: `~/.config/fish/config.fish`
 
-The following additions to that file represent a minimal configuration that includes no external repositories and does not enable any modules or plugins:
+Adding the following line to the above file will create a minimal configuration that includes no external repositories and does not enable any modules or plugins:
 
     source ~/.tacklebox/tacklebox.fish
 
@@ -63,7 +61,7 @@ Assuming you used the automated install script (or manually cloned the [Tackle][
 
     set tacklebox_path ~/.tackle
     set tacklebox_modules virtualfish virtualhooks
-    set tacklebox_plugins python extract
+    set tacklebox_plugins extract grc pip python up
     set tacklebox_theme entropy
     source ~/.tacklebox/tacklebox.fish
 
@@ -91,7 +89,7 @@ Can't find a plugin that does what you want? Prefer to create your own theme? Ta
 * `~/.tacklebox/plugins/`
 * `~/.tacklebox/themes/`
 
-Remember that adding your custom components at the above locations isn't sufficient — you must enable them by including them in your `tacklebox_modules`, `tacklebox_plugins`, and/or `tacklebox_theme` settings, in addition to including tacklebox itself in your `tacklebox_path` setting.
+Remember that adding your custom components at the above locations isn't sufficient — you must enable them by including them in your `tacklebox_modules`, `tacklebox_plugins`, and/or `tacklebox_theme` settings, in addition to including `~/.tacklebox` itself in your `tacklebox_path` setting.
 
 If you would rather keep your collection of custom goodies in your own versioned repository instead of the directories provided by Tacklebox, just create your own repository at your preferred filesystem location and prepend its path to the `tacklebox_path` list.
 
@@ -103,19 +101,18 @@ Contributions to both Tacklebox and [Tackle][] are welcomed. If you'd like to co
 
 ## Questions nobody asked but here are answers anyway
 
-_How is this different from Oh My Fish?_
+_How is this different from other shell management tools?_
 
-Tacklebox owes a debt of gratitude to the many fine folks who have contributed to Oh My Fish. Among the differences are that Tacklebox…
+Tacklebox…
 
-1. … supports multiple repositories, including your own if you wish
-1. … decouples the repositories (e.g., [Tackle][]) from the loading mechanisms and organizational conventions (i.e., Tacklebox)
-1. … can source modules using `*.fish` filename extensions (instead of using `*.load`, which requires monkeying with your $EDITOR to get proper syntax highlighting)
+1. supports multiple repositories, including your own if you wish
+1. decouples the repositories (e.g., [Tackle][]) from the loading mechanisms and organizational conventions (i.e., Tacklebox)
+1. can source modules using `*.fish` filename extensions (instead of using `*.load`, which requires monkeying with your $EDITOR to get proper syntax highlighting)
 
 _But I want to create a plugin that includes files that must be sourced!_
 
 That's not a question, but you can still put `*.load` files inside plugins if you must, and they will be sourced. That said, dynamically-loadable functions are probably more "fishy", and code that isn't suitable as dynamically-loadable functions might be best included as a module.
 
-[fish]: http://fishshell.com/
+[Fish]: http://fishshell.com/
 [contributing guidelines]: https://github.com/justinmayer/tacklebox/blob/master/Contributing.md
 [Tackle]: https://github.com/justinmayer/tackle
-[Oh My Fish]: https://github.com/bpinto/oh-my-fish
