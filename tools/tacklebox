@@ -1,0 +1,16 @@
+#!/usr/bin/env fish
+################################################################################
+# Just a quick shortcut to update tacklebox and tackle
+# I installed mine in ~/bin
+# Don't forget to chmod +x and make sure its in your PATH, and you can just
+# type `tacklebox` to update both folders.
+#
+
+echo "Updating ~/.tacklebox ..."
+cd ~/.tacklebox; git pull
+
+echo "Updating ~/.tackle ..."
+cd ~/.tackle; git pull
+
+echo "...done!"
+
